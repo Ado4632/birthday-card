@@ -40,8 +40,8 @@
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             position: relative;
-            overflow: hidden;
-            padding: 30px 20px;
+            overflow: visible; /* Меняем с hidden на visible */
+            padding: 20px;
             text-align: center;
         }
 
@@ -68,23 +68,23 @@
         }
 
         h2 {
-    color: white;
-    font-size: 2rem;
-    margin: 20px 0 30px 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    position: relative;
-    display: block; /* Меняем на block вместо inline-block */
-    white-space: nowrap; /* Запрещаем перенос */
-    line-height: 1.2;
-}
+            color: white;
+            font-size: 1.8rem; /* Уменьшаем базовый размер шрифта */
+            margin: 15px 0 25px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            display: block;
+            word-break: break-word; /* Разрешаем перенос слов */
+            padding: 0 10px; /* Добавляем отступы по бокам */
+        }
 
     .header-emoji {
-    display: inline-block;
-    position: relative;
-    font-size: 1.2rem; /* Делаем звездочки немного меньше */
-    margin: 0 5px;
-    top: -2px; /* Немного приподнимаем звездочки */
-}
+            display: inline-block;
+            position: relative;
+            font-size: 1.2rem; /* Делаем звездочки немного меньше */
+            margin: 0 5px;
+            top: -2px; /* Немного приподнимаем звездочки */
+        }
 
         @keyframes sparkle {
             0% { transform: scale(1) rotate(0deg); }
@@ -273,13 +273,17 @@
         }
 
         @media (max-width: 768px) {
-        .container {
-            padding: 20px 15px;
-        }
-    
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            .container {
+                width: 85%; /* Уменьшаем ширину контейнера */
+                padding: 20px 15px;
+                margin: 10px auto;
+            }
+        
+            h2 {
+                font-size: 1.5rem; /* Еще уменьшаем размер на мобильных */
+                margin-bottom: 20px;
+                line-height: 1.3; /* Увеличиваем межстрочный интервал */
+            }
         }
     
         .input-3d {
@@ -311,6 +315,18 @@
         .sparkle-animation {
             animation: sparkle 1.5s infinite;
     }
+
+        @media (max-width: 360px) {
+            .container {
+                width: 95%;
+                padding: 15px 10px;
+            }
+        
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+        
         @keyframes sparkle {
             0% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.7; transform: scale(1.2); }
