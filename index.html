@@ -18,7 +18,9 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             min-height: 100vh;
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,22 +28,64 @@
             overflow-x: hidden;
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .container {
             width: min(90%, 600px);
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(145deg, #ff69b4, #ff1493);
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255,255,255,0.1),
+                rgba(255,255,255,0.2),
+                rgba(255,255,255,0.1)
+            );
+            transform: skewX(-15deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) skewX(-15deg); }
+            100% { transform: translateX(100%) skewX(-15deg); }
         }
 
         h2 {
             color: white;
-            font-size: 2rem;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            margin: 10px 0 30px 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        .header-emoji {
+            display: inline-block;
+            animation: sparkle 1.5s infinite;
+            margin: 0 5px;
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
         }
 
         .password-wrapper {
@@ -56,7 +100,7 @@
             border: none;
             border-radius: 25px;
             font-size: 16px;
-            background: white;
+            background: rgba(255,255,255,0.9);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             -webkit-appearance: none;
@@ -65,7 +109,9 @@
 
         .input-3d:focus {
             outline: none;
-            box-shadow: 0 8px 20px rgba(255,105,180,0.3);
+            background: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
         }
 
         .toggle-password {
@@ -76,6 +122,12 @@
             cursor: pointer;
             color: #ff69b4;
             transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .toggle-password:hover {
+            color: #ff1493;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .hint {
@@ -91,53 +143,82 @@
             font-size: 1.1rem;
             padding: 10px 20px;
             transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .hint-trigger:hover {
+            opacity: 1;
+            transform: scale(1.05);
         }
 
         .hint-text {
             display: none;
             padding: 15px;
-            background: white;
+            background: rgba(255,255,255,0.95);
             border-radius: 15px;
             margin: 10px auto;
             width: min(85%, 300px);
             font-size: 1rem;
             color: #ff1493;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .submit-button {
             display: block;
             width: min(85%, 300px);
-            margin: 20px auto;
+            margin: 25px auto;
             padding: 15px 30px;
             background: linear-gradient(45deg, #ff69b4, #ff1493);
             color: white;
             border: none;
             border-radius: 25px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255,105,180,0.3);
+            animation: none;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         #content {
             display: none;
             text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         #content h1 {
-            font-size: 2rem;
-            color: #ff1493;
+            font-size: 2.2rem;
+            color: white;
             margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         #content p {
-            font-size: 1.2rem;
-            color: #666;
+            font-size: 1.3rem;
+            color: white;
             margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
         .video-link {
@@ -145,18 +226,82 @@
             width: min(85%, 300px);
             margin: 20px auto;
             padding: 15px 30px;
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            color: white;
+            background: white;
+            color: #ff1493;
             text-decoration: none;
             border-radius: 25px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             text-align: center;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .video-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255,105,180,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff69b4;
+            position: absolute;
+            top: -10px;
+            animation: confettiFall 2s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+            }
+
+            .input-3d {
+                font-size: 16px;
+                padding: 12px 40px 12px 15px;
+            }
+
+            .submit-button, 
+            .video-link {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+                width: 90%;
+            }
+
+            #content h1 {
+                font-size: 1.8rem;
+            }
+
+            #content p {
+                font-size: 1.1rem;
+            }
+            
+            .hint-text {
+                width: 90%;
+                font-size: 0.9rem;
+            }
         }
 
         .success-animation {
@@ -169,55 +314,25 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            background: rgba(255, 20, 147, 0.2);
+            background: rgba(255,20,147,0.2);
+            backdrop-filter: blur(5px);
         }
 
         .success-message {
-            font-size: 28px;
-            padding: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 20px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: successPop 1.5s ease-in-out;
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255,105,180,0.5);
             color: #ff1493;
-            width: 90%;
-            max-width: 300px;
-            animation: successPop 1.5s ease forwards;
+            font-size: 2rem;
         }
 
         @keyframes successPop {
-            0% { opacity: 0; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0; transform: scale(0.8); }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 15px;
-                margin: 10px;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
-            }
-
-            .submit-button,
-            .video-link {
-                font-size: 1.2rem;
-                padding: 12px 25px;
-                width: 85%;
-            }
-
-            #content h1 {
-                font-size: 1.8rem;
-            }
-
-            #content p {
-                font-size: 1.2rem;
-                margin: 15px 0;
-            }
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
         }
     </style>
 </head>
@@ -226,7 +341,7 @@
 
     <div class="container">
         <div id="passwordPrompt">
-            <h2>✨ Особенное поздравление! ✨</h2>
+            <h2><span class="header-emoji">✨</span>Особенное поздравление!<span class="header-emoji">✨</span></h2>
             
             <div class="password-wrapper">
                 <input type="password" id="passwordInput" class="input-3d" placeholder="Введите пароль...">
@@ -325,6 +440,21 @@
             }
         });
 
+        // Создание конфетти
+        function createConfetti() {
+            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ffc0cb', '#ffffff'];
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = confetti.style.width;
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 2000);
+        }
+
         // Функция анимации успеха
         function showSuccessAnimation() {
             const successAnim = document.createElement('div');
@@ -344,10 +474,15 @@
 
         // Проверка пароля
         function checkPassword() {
-            const correctPassword = 'пазл';
+            const correctPassword = 'профнастил';
             const input = document.getElementById('passwordInput');
             
             if (input.value.toLowerCase() === correctPassword) {
+                // Создаем множество конфетти
+                for(let i = 0; i < 50; i++) {
+                    setTimeout(() => createConfetti(), i * 40);
+                }
+
                 showSuccessAnimation();
                 
                 setTimeout(() => {
@@ -355,6 +490,8 @@
                     document.getElementById('content').style.display = 'block';
                 }, 1000);
             } else {
+                input.classList.add('shake');
+                setTimeout(() => input.classList.remove('shake'), 500);
                 alert('Неверный пароль. Попробуйте еще раз! Может быть, стоит посмотреть подсказку? 😉');
                 input.value = '';
             }
