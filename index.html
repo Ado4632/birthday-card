@@ -43,21 +43,23 @@
             overflow: hidden;
             padding: 20px;
             text-align: center;
-            animation: gradientMove 8s ease infinite;
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
         }
         
         @keyframes gradientMove {
             0% {
-                background: linear-gradient(145deg, #ff69b4, #ff1493);
+                background-position: 0% 50%;
             }
             50% {
-                background: linear-gradient(145deg, #ff1493, #ff69b4);
+                background-position: 100% 50%;
             }
             100% {
-                background: linear-gradient(145deg, #ff69b4, #ff1493);
+                background-position: 0% 50%;
             }
         }
-
+        
+        /* Мягкое свечение */
         .container::after {
             content: '';
             position: absolute;
@@ -65,7 +67,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            background: linear-gradient(45deg, rgba(255,105,180,0.5), rgba(255,20,147,0.5));
             z-index: -1;
             border-radius: 22px;
             filter: blur(15px);
