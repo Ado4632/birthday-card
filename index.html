@@ -68,19 +68,23 @@
         }
 
         h2 {
-            color: white;
-            font-size: 2.2rem;
-            margin: 10px 0 30px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            position: relative;
-            display: inline-block;
-        }
+    color: white;
+    font-size: 2rem;
+    margin: 20px 0 30px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    position: relative;
+    display: block; /* Меняем на block вместо inline-block */
+    white-space: nowrap; /* Запрещаем перенос */
+    line-height: 1.2;
+}
 
-        .header-emoji {
-            display: inline-block;
-            animation: sparkle 1.5s infinite;
-            margin: 0 5px;
-        }
+    .header-emoji {
+    display: inline-block;
+    position: relative;
+    font-size: 1.2rem; /* Делаем звездочки немного меньше */
+    margin: 0 5px;
+    top: -2px; /* Немного приподнимаем звездочки */
+}
 
         @keyframes sparkle {
             0% { transform: scale(1) rotate(0deg); }
@@ -269,39 +273,48 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 20px 15px;
-            }
+        .container {
+            padding: 20px 15px;
+        }
+    
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+    
+        .input-3d {
+            font-size: 16px;
+            padding: 12px 40px 12px 15px;
+        }
+    
+        .submit-button,
+        .video-link {
+            font-size: 1.1rem;
+            padding: 12px 25px;
+            width: 90%;
+        }
+    
+        #content h1 {
+            font-size: 1.8rem;
+        }
+    
+        #content p {
+            font-size: 1.1rem;
+        }
+        
+        .hint-text {
+            font-size: 0.9rem;
+        }
+    }
 
-            h2 {
-                font-size: 1.8rem;
-                margin-bottom: 25px;
-            }
-
-            .input-3d {
-                font-size: 16px;
-                padding: 12px 40px 12px 15px;
-            }
-
-            .submit-button, 
-            .video-link {
-                font-size: 1.1rem;
-                padding: 12px 25px;
-                width: 90%;
-            }
-
-            #content h1 {
-                font-size: 1.8rem;
-            }
-
-            #content p {
-                font-size: 1.1rem;
-            }
-            
-            .hint-text {
-                width: 90%;
-                font-size: 0.9rem;
-            }
+        /* Добавляем стили для звездочек */
+        .sparkle-animation {
+            animation: sparkle 1.5s infinite;
+    }
+        @keyframes sparkle {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .success-animation {
@@ -341,7 +354,11 @@
 
     <div class="container">
         <div id="passwordPrompt">
-            <h2><span class="header-emoji">✨</span>Особенное поздравление!<span class="header-emoji">✨</span></h2>
+           <h2>
+                <span class="header-emoji sparkle-animation">✨</span>
+                Особенное поздравление!
+                <span class="header-emoji sparkle-animation">✨</span>
+           </h2>
             
             <div class="password-wrapper">
                 <input type="password" id="passwordInput" class="input-3d" placeholder="Введите пароль...">
