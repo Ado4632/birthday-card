@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -23,6 +23,7 @@
             justify-content: center;
             align-items: center;
             padding: 15px;
+            overflow-x: hidden;
         }
 
         .container {
@@ -33,56 +34,7 @@
             position: relative;
             overflow: hidden;
             padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 15px;
-                margin: 10px;
-            }
-
-            h2 {
-                font-size: 1.5rem !important;
-                margin-bottom: 20px !important;
-            }
-
-            .input-3d {
-                font-size: 1.2rem !important;
-                padding: 12px 40px 12px 15px !important;
-            }
-
-            .hint-trigger {
-                font-size: 1.1rem !important;
-                padding: 10px !important;
-            }
-
-            .submit-button {
-                font-size: 1.2rem !important;
-                padding: 12px 25px !important;
-                width: 85% !important;
-                max-width: none !important;
-            }
-
-            .video-link {
-                font-size: 1.2rem !important;
-                padding: 12px 25px !important;
-                width: 85% !important;
-            }
-
-            .success-message {
-                font-size: 1.8rem !important;
-                padding: 15px !important;
-            }
-
-            #content h1 {
-                font-size: 1.8rem !important;
-            }
-
-            #content p {
-                font-size: 1.2rem !important;
-                margin: 15px 0 !important;
-            }
+            text-align: center;
         }
 
         h2 {
@@ -103,7 +55,7 @@
             padding: 15px 40px 15px 15px;
             border: none;
             border-radius: 25px;
-            font-size: 1.1rem;
+            font-size: 16px;
             background: white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
@@ -114,6 +66,16 @@
         .input-3d:focus {
             outline: none;
             box-shadow: 0 8px 20px rgba(255,105,180,0.3);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #ff69b4;
+            transition: all 0.3s ease;
         }
 
         .hint {
@@ -161,19 +123,6 @@
             box-shadow: 0 8px 20px rgba(255,105,180,0.3);
         }
 
-        .video-link {
-            display: block;
-            width: min(85%, 300px);
-            margin: 20px auto;
-            padding: 15px 30px;
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-
         #content {
             display: none;
             text-align: center;
@@ -191,23 +140,83 @@
             margin: 20px 0;
         }
 
-        /* Фиксим проблему с масштабированием при фокусе на мобильных */
-        @media screen and (max-width: 768px) {
-            input[type="password"],
-            input[type="text"] {
-                font-size: 16px !important; /* Предотвращает зум на iOS */
-            }
+        .video-link {
+            display: block;
+            width: min(85%, 300px);
+            margin: 20px auto;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
 
+        .video-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,105,180,0.3);
+        }
+
+        .success-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 20, 147, 0.2);
+        }
+
+        .success-message {
+            font-size: 28px;
+            padding: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255,105,180,0.5);
+            color: #ff1493;
+            width: 90%;
+            max-width: 300px;
+            animation: successPop 1.5s ease forwards;
+        }
+
+        @keyframes successPop {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        @media (max-width: 768px) {
             .container {
-                transform: none !important;
+                width: 95%;
+                padding: 15px;
+                margin: 10px;
             }
 
-            body {
-                min-height: -webkit-fill-available;
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
             }
 
-            html {
-                height: -webkit-fill-available;
+            .submit-button,
+            .video-link {
+                font-size: 1.2rem;
+                padding: 12px 25px;
+                width: 85%;
+            }
+
+            #content h1 {
+                font-size: 1.8rem;
+            }
+
+            #content p {
+                font-size: 1.2rem;
+                margin: 15px 0;
             }
         }
     </style>
@@ -215,53 +224,48 @@
 <body>
     <div id="particles-js"></div>
 
-<div class="container">
-    <div class="glowing-border"></div>
-    
-    <div id="passwordPrompt">
-        <h2><span class="header-emoji">✨</span>Особенное поздравление!<span class="header-emoji">✨</span></h2>
-        
-        <div class="password-wrapper">
-            <input type="password" id="passwordInput" class="input-3d" placeholder="Введите пароль...">
-            <i class="toggle-password fas fa-eye"></i>
-        </div>
-        
-        <div class="hint">
-            <button class="hint-trigger">Нужна подсказка?</button>
-            <div class="hint-text">
-                Он мешал нам играть в монополию! Этот дурацкий п...л (с) Твой мних
+    <div class="container">
+        <div id="passwordPrompt">
+            <h2>✨ Особенное поздравление! ✨</h2>
+            
+            <div class="password-wrapper">
+                <input type="password" id="passwordInput" class="input-3d" placeholder="Введите пароль...">
+                <i class="toggle-password fas fa-eye"></i>
             </div>
+            
+            <div class="hint">
+                <button class="hint-trigger">
+                    <i class="fas fa-lightbulb"></i> Нужна подсказка?
+                </button>
+                <div class="hint-text">
+                    Он мешал нам играть в монополию! Этот дурацкий п...л (с) Твой мних
+                </div>
+            </div>
+            
+            <button class="submit-button" onclick="checkPassword()">
+                <i class="fas fa-gift"></i> Открыть поздравление
+            </button>
         </div>
-        
-        <button class="submit-button" onclick="checkPassword()">Открыть поздравление</button>
-    </div>
 
-    <div id="content">
-        <h1>С Днем Рождения! 🎉</h1>
-        <p>Специально для тебя ❤️</p>
-        <a href="https://drive.google.com/drive/folders/1-6qIoyxxzXcfdg7rsGn9c3KjMK1CPIlg" class="video-link">
-            <i class="fas fa-play-circle"></i> Смотреть видео-поздравление
-        </a>
+        <div id="content">
+            <h1>С Днем Рождения! 🎉</h1>
+            <p>Специально для тебя ❤️</p>
+            <a href="https://drive.google.com/drive/folders/1-6qIoyxxzXcfdg7rsGn9c3KjMK1CPIlg" class="video-link">
+                <i class="fas fa-play-circle"></i> Смотреть видео-поздравление
+            </a>
+        </div>
     </div>
-</div>
 
     <script>
         // Инициализация частиц
         tsParticles.load("particles-js", {
             particles: {
                 number: {
-                    value: 50,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
+                    value: 30,
+                    density: { enable: true, value_area: 800 }
                 },
-                color: {
-                    value: "#ffffff"
-                },
-                shape: {
-                    type: "circle"
-                },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
                 opacity: {
                     value: 0.5,
                     random: true
@@ -308,104 +312,51 @@
                 input.type = 'password';
                 this.classList.remove('fa-eye-slash');
                 this.classList.add('fa-eye');
-}
+            }
         });
 
-        // Показать/скрыть подсказку с анимацией
+        // Показать/скрыть подсказку
         document.querySelector('.hint-trigger').addEventListener('click', function() {
             const hintText = document.querySelector('.hint-text');
             if (hintText.style.display === 'none' || !hintText.style.display) {
                 hintText.style.display = 'block';
-                hintText.style.animation = 'hintAppear 0.5s ease forwards';
             } else {
-                hintText.style.animation = 'hintAppear 0.5s ease reverse';
-                setTimeout(() => {
-                    hintText.style.display = 'none';
-                }, 500);
+                hintText.style.display = 'none';
             }
         });
 
-        // Создание эмодзи для анимации
-        const emojis = ['🎉', '🎈', '🎊', '🎂', '🎁', '💝', '✨', '💫', '⭐'];
-        function createEmoji() {
-            const emoji = document.createElement('div');
-            emoji.className = 'emoji';
-            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-            emoji.style.left = Math.random() * 100 + 'vw';
-            emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            document.querySelector('.emoji-rain').appendChild(emoji);
-            setTimeout(() => emoji.remove(), 5000);
-        }
-
-        // Создание конфетти
-        function createConfetti() {
-            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ffc0cb', '#ffffff'];
-            const confetti = document.createElement('div');
-            confetti.style.position = 'absolute';
-            confetti.style.width = '10px';
-            confetti.style.height = '10px';
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.top = -10 + 'px';
-            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-            confetti.style.opacity = Math.random();
-            confetti.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear forwards`;
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 5000);
-        }
-
-        // Эффект успешного входа
+        // Функция анимации успеха
         function showSuccessAnimation() {
             const successAnim = document.createElement('div');
             successAnim.className = 'success-animation';
+            
             const message = document.createElement('div');
             message.className = 'success-message';
-            message.textContent = '🎉 С Днем Рождения! 🎉';
+            message.innerHTML = window.innerWidth <= 768 ? 
+                '🎉<br>С Днем<br>Рождения!<br>🎉' : 
+                '🎉 С Днем Рождения! 🎉';
+            
             successAnim.appendChild(message);
             document.body.appendChild(successAnim);
-            setTimeout(() => successAnim.remove(), 1500);
+            
+            setTimeout(() => successAnim.remove(), window.innerWidth <= 768 ? 2000 : 1500);
         }
 
-        // Проверка пароля с анимацией
+        // Проверка пароля
         function checkPassword() {
-            const correctPassword = 'профнастил';
-            const input = document.getElementById('passwordInput').value;
+            const correctPassword = 'пазл';
+            const input = document.getElementById('passwordInput');
             
-            if (input.toLowerCase() === correctPassword) {
-                // Создаем контейнер для эмодзи
-                if (!document.querySelector('.emoji-rain')) {
-                    const emojiContainer = document.createElement('div');
-                    emojiContainer.className = 'emoji-rain';
-                    document.body.appendChild(emojiContainer);
-                }
-                
-                // Запускаем анимации
+            if (input.value.toLowerCase() === correctPassword) {
                 showSuccessAnimation();
                 
-                // Создаем эмодзи и конфетти
-                for (let i = 0; i < 50; i++) {
-                    setTimeout(() => {
-                        createEmoji();
-                        createConfetti();
-                    }, i * 100);
-                }
-
-                // Плавно скрываем форму и показываем контент
-                document.getElementById('passwordPrompt').style.animation = 'contentAppear 1s ease reverse';
                 setTimeout(() => {
                     document.getElementById('passwordPrompt').style.display = 'none';
                     document.getElementById('content').style.display = 'block';
-                    document.getElementById('content').style.animation = 'contentAppear 1s ease forwards';
                 }, 1000);
-
-                // Добавляем эффект пульсации фона
-                document.body.style.animation = 'gradientBG 5s ease infinite';
             } else {
-                // Анимация ошибки
-                const input = document.getElementById('passwordInput');
-                input.style.animation = 'shake 0.5s ease';
-                setTimeout(() => input.style.animation = '', 500);
                 alert('Неверный пароль. Попробуйте еще раз! Может быть, стоит посмотреть подсказку? 😉');
+                input.value = '';
             }
         }
 
@@ -415,27 +366,6 @@
                 checkPassword();
             }
         });
-
-        // Добавляем стили для анимации тряски при неверном пароле
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-            }
-            @keyframes confettiFall {
-                0% { 
-                    transform: translateY(-10px) rotate(0deg);
-                    opacity: 1;
-                }
-                100% { 
-                    transform: translateY(100vh) rotate(720deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
